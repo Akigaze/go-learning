@@ -34,6 +34,8 @@ func TestWallet(t *testing.T) {
 }
 
 func assertBalance(t *testing.T, wallet *Wallet, wanted Bitcoin) {
+	t.Helper()
+
 	got := wallet.Balance()
 	if got != wanted {
 		// 想要使用String(), 需要使用 %s 进行格式化
@@ -42,12 +44,16 @@ func assertBalance(t *testing.T, wallet *Wallet, wanted Bitcoin) {
 }
 
 func assertNoError(t *testing.T, get error) {
+	t.Helper()
+
 	if get != nil {
 		t.Fatal("got an error but didn't wanted")
 	}
 }
 
-func assertError(t *testing.T, get error, wanted error) {
+func assertError(t *testing.T, get, wanted error) {
+	t.Helper()
+
 	if get == nil {
 		t.Fatal("wanted an error but didn't got")
 	}
